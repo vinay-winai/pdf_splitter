@@ -5,20 +5,6 @@ from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-# # Simulated OAuth2 token verification (Replace with actual OAuth2 verification)
-# def get_current_user(token: str = Depends(oauth2_scheme)):
-#     if not verify_token(token):
-#         raise HTTPException(status_code=401, detail="Invalid credentials")
-#     return token
-
-# def verify_token(token: str) -> bool:
-#     # Your OAuth2 token verification logic here (e.g., validate against the OAuth2 provider)
-#     # Replace this with the actual verification process
-#     # For example, check if the token is valid, hasn't expired, and is associated with a valid user.
-#     return True
-
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
 def split_pdf_pages(input_file, max_dim_val):
     # File input validation
     try:
@@ -71,6 +57,5 @@ def split_pdf_pages(input_file, max_dim_val):
 async def split_pdf_pages_endpoint(
     input_file: UploadFile = File(...),
     max_dim_val: Optional[int] = 3480,
-    # current_user: str = Depends(get_current_user)
 ):
     return split_pdf_pages(input_file, max_dim_val)
