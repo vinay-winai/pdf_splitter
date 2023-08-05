@@ -57,5 +57,7 @@ def split_pdf_pages(input_file, max_dim_val):
 async def split_pdf_pages_endpoint(
     input_file: UploadFile = File(...),
     max_dim_val: Optional[int] = 3480,
-):
+):  
+    if max_dim_val < 200:
+        return 'max_dim_val cannot be less than 200'
     return split_pdf_pages(input_file, max_dim_val)
